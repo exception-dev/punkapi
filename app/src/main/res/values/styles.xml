@@ -29,13 +29,13 @@
     </style>
 
 
-    <style name="HorizontalView">
+    <style name="HorizontalViewStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1px</item>
         <item name="android:background">#cccccc</item>
     </style>
 
-    <style name="SeparatorView">
+    <style name="SeparatorViewStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">5dp</item>
         <item name="android:background">#f1f1f1</item>
