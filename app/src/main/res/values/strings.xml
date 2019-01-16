@@ -4,4 +4,11 @@
 
     <string name="app_info">H a n d m a d e B e e r</string>
     <string name="copyright">2019 ⓒ exception inc</string>
+
+
+    <string name="abv">ABV</string>
+    <string name="ibu">IBU</string>
+    <string name="ebc">EBC</string>
+    <string name="srm">SRM</string>
+    <string name="ph">PH</string>
 </resources>
