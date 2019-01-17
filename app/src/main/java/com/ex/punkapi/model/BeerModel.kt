@@ -1,9 +1,12 @@
 package com.ex.punkapi.model
 
+import io.realm.RealmList
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
 
-class BeerModel{
 
-
+open class BeerModel: RealmObject(){
+    @PrimaryKey
     var id:Long = 0
     var name: String = ""
     var tagline: String = ""
@@ -11,18 +14,18 @@ class BeerModel{
     var firstBrewed: String = ""
     var description: String = ""
     var imageUrl: String = ""
-    var abv: Number = 0
-    var ibu: Number = 0
-    var targetFg: Number = 0
-    var targetOg: Number = 0
-    var ebc: Number = 0
-    var srm: Number = 0
-    var ph: Number = 0
-    var attenustionLevel: Number = 0
-    var volume: ValueModel = ValueModel()
-    var boilVolume: ValueModel = ValueModel()
-    var method : MethodModel = MethodModel()
-    var foodPairing: ArrayList<String> = ArrayList()
+    var abv: String = ""
+    var ibu: String = ""
+    var targetFg: String = ""
+    var targetOg: String = ""
+    var ebc: String = ""
+    var srm: String = ""
+    var ph: String = ""
+    var attenustionLevel: Float = 0f
+    var volume: ValueModel? = ValueModel()
+    var boilVolume: ValueModel? = ValueModel()
+    var method : MethodModel? = MethodModel()
+    var foodPairing: RealmList<String> = RealmList()
     var brewersTips: String = ""
     var contributedBy : String = ""
     override fun toString(): String {

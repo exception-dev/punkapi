@@ -1,9 +1,11 @@
 package com.ex.punkapi.model
 
+import io.realm.RealmObject
 
-class MethodItemModel{
-    var temp:ValueModel = ValueModel()
-    var duration:Number = 0
+
+open class MethodItemModel: RealmObject(){
+    var temp:ValueModel? = ValueModel()
+    var duration:Float = 0f
 
     override fun toString(): String {
         return "MethodItemModel(temp=$temp, duration=$duration)"

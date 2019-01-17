@@ -1,9 +1,11 @@
 package com.ex.punkapi.model
 
+import io.realm.RealmObject
 
-class IngredientItemModel{
+
+open class IngredientItemModel:RealmObject(){
     var name:String = ""
-    var amount:ValueModel = ValueModel()
+    var amount:ValueModel? = ValueModel()
     var add:String = ""
     var attribute = ""
     override fun toString(): String {

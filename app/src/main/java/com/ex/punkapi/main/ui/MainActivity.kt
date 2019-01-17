@@ -24,6 +24,8 @@ import android.text.style.ForegroundColorSpan
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
 import android.widget.TextView
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import kotlinx.android.synthetic.main.activity_main_left_item.view.*
 import kotlinx.android.synthetic.main.activity_main_item.view.*
 
@@ -36,7 +38,9 @@ class MainActivity : BaseActivity() {
 
     private lateinit var adapter: ListAdapter
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private val dataList = ArrayList<BeerModel>()
+    private val dataList = mutableListOf<BeerModel>()
+
+    private lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
@@ -48,6 +52,18 @@ class MainActivity : BaseActivity() {
     }
 
     private fun init(){
+
+        Realm.init(this)
+
+        var config = RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build()
+        realm = Realm.getInstance(config)
+
+        var list = mutableListOf<BeerModel>()
+        list.addAll(realm.where(BeerModel::class.java).findAll())
+        println("list.size : ${list.size}")
+        println("list : ${list}")
+
+
         layoutManager = LinearLayoutManager(this);
         recyclerView.layoutManager = layoutManager
         adapter = ListAdapter()
@@ -61,14 +77,21 @@ class MainActivity : BaseActivity() {
     }
 
     private fun getData() {
-        val parameter = HashMap<String, Any>()
+        val parameter = mutableMapOf<String, Any>()
         parameter.put("page", page)
         parameter.put("per_page", Constants.PER_PAGE)
-        println("***********getData*************")
-        requestCall(apiService.beers(parameter),  object : NetWorkCallback<ArrayList<BeerModel>>(this)   {
-            override fun onSuccess(call: Call<ArrayList<BeerModel>>, response: Response<ArrayList<BeerModel>>, data: ArrayList<BeerModel>) {
 
-                println("data : $data")
+
+
+        requestCall(apiService.beers(parameter),  object : NetWorkCallback<MutableList<BeerModel>>(this)   {
+            override fun onSuccess(call: Call<MutableList<BeerModel>>, response: Response<MutableList<BeerModel>>, data: MutableList<BeerModel>) {
+
+
+                realm.beginTransaction()
+
+                realm.insertOrUpdate(data)
+                realm.commitTransaction()
+
 
                 if(page == 1){
                     dataList.clear();
@@ -104,6 +127,8 @@ class MainActivity : BaseActivity() {
 
     }
 
+
+
     inner class ListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         private val VIEW_TYPE_FIRST = 0
@@ -129,10 +154,9 @@ class MainActivity : BaseActivity() {
 
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-            println("**************onCreateViewHolder***************")
-            println("viewType : $viewType")
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
             var v: View? = null
 
@@ -224,7 +248,7 @@ class MainActivity : BaseActivity() {
 
         }
 
-        private fun makeSpanText(builder: SpannableStringBuilder, label: String, value: Number?) : SpannableStringBuilder{
+        private fun makeSpanText(builder: SpannableStringBuilder, label: String, value: String?) : SpannableStringBuilder{
             if (value != null){
                 if(builder.isNotEmpty()){
                     builder.append("\r\n")

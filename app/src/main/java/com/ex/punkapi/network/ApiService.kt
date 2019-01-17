@@ -10,7 +10,7 @@ import retrofit2.http.QueryMap
 interface ApiService {
 
     @GET("beers")
-    fun beers(@QueryMap params: HashMap<String, Any>): Call<ArrayList<BeerModel>>
+    fun beers(@QueryMap params: MutableMap<String, Any>): Call<MutableList<BeerModel>>
 
     @GET("beers/{id}")
     fun playerInfo(@Path("id") playerId: String): Call<*>

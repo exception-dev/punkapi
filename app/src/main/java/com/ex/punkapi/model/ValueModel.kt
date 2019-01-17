@@ -1,7 +1,9 @@
 package com.ex.punkapi.model
 
-class ValueModel{
-    var value: Number = 0
+import io.realm.RealmObject
+
+open class ValueModel:RealmObject(){
+    var value: Float = 0f
     var unit: String = ""
     override fun toString(): String {
         return "ValueModel(value=$value, unit='$unit')"
