@@ -26,7 +26,7 @@ open class BeerModel: RealmObject(){
     var boilVolume: ValueModel? = ValueModel()
     var method : MethodModel? = MethodModel()
     var ingredients: IngredientModel? = IngredientModel()
-    var foodPairing: RealmList<String> = RealmList()
+    var foodPairing: RealmList<String>? = RealmList()
     var brewersTips: String = ""
     var contributedBy : String = ""
     override fun toString(): String {

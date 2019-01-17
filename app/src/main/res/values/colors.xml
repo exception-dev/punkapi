@@ -10,5 +10,5 @@
     <color name="subTextColor">#666666</color>
 
     <color name="pointDarkColor">#002B57</color>
-    <color name="pointLightColor">#D81B60</color>
+    <color name="pointLightColor">#FF5555</color>
 </resources>

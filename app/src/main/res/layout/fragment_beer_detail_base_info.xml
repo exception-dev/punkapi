@@ -1,15 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_horizontal_margin">
 
-    <TextView
+
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="abc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\nabc\n"/>
+            android:orientation="vertical">
+
+        <TextView
+                style="@style/InfoLabelStyle"
+                android:text="@string/tagline"
+                android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+        <TextView
+                android:id="@+id/txtTagline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/subTextColor"/>
+
+        <TextView
+                style="@style/InfoLabelStyle"
+                android:text="@string/first_brewed"/>
+
+        <TextView
+                android:id="@+id/txtBrewed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/subTextColor"/>
+
+        <TextView
+                style="@style/InfoLabelStyle"
+                android:text="@string/description"/>
+
+        <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/subTextColor"/>
+
+        <TextView
+                style="@style/InfoLabelStyle"
+                android:text="@string/food_pairing"/>
+
+        <TextView
+                android:id="@+id/txtFoodPairing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/subTextColor"/>
+
+        <TextView
+                style="@style/InfoLabelStyle"
+                android:text="@string/brewers_tips"/>
+
+        <TextView
+                android:id="@+id/txtBrewersTip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/subTextColor"/>
+
+        <TextView
+                style="@style/InfoLabelStyle"
+                android:text="@string/contributed_by"/>
+
+        <TextView
+                android:id="@+id/txtContribute"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/subTextColor"/>
+
+    </LinearLayout>
+
 
 </android.support.v4.widget.NestedScrollView>

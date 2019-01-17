@@ -5,4 +5,6 @@ object Constants {
     const val PER_PAGE = 20
 
     const val BEER_ID = "beer_id"
+
+
 }

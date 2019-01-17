@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_beer_detail.*
 
 class BeerDetailActivity : BaseTabActivity() {
 
-    var beerId:Long = 0
+    private var beerId:Long = 0
     private var beerModel: BeerModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

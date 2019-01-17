@@ -15,4 +15,13 @@
     <string name="base_info">기본정보</string>
     <string name="method">제조방법</string>
     <string name="ingredient">성분</string>
+
+    <string name="do_purchase">구매하기</string>
+
+    <string name="tagline">Tagline</string>
+    <string name="first_brewed">최초 양조일</string>
+    <string name="description">설명</string>
+    <string name="food_pairing">푸드 페어링</string>
+    <string name="brewers_tips">양조 팁</string>
+    <string name="contributed_by">기부자</string>
 </resources>
