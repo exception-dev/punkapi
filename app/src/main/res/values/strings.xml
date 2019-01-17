@@ -11,4 +11,8 @@
     <string name="ebc">EBC</string>
     <string name="srm">SRM</string>
     <string name="ph">PH</string>
+
+    <string name="base_info">기본정보</string>
+    <string name="method">제조방법</string>
+    <string name="ingredient">성분</string>
 </resources>

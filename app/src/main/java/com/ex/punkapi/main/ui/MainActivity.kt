@@ -1,5 +1,6 @@
 package com.ex.punkapi.main.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -28,6 +29,9 @@ import io.realm.Realm
 import io.realm.RealmConfiguration
 import kotlinx.android.synthetic.main.activity_main_left_item.view.*
 import kotlinx.android.synthetic.main.activity_main_item.view.*
+import android.support.v4.widget.SwipeRefreshLayout
+
+
 
 
 
@@ -53,10 +57,7 @@ class MainActivity : BaseActivity() {
 
     private fun init(){
 
-        Realm.init(this)
-
-        var config = RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build()
-        realm = Realm.getInstance(config)
+        realm = app.getRealm()
 
         var list = mutableListOf<BeerModel>()
         list.addAll(realm.where(BeerModel::class.java).findAll())
@@ -101,6 +102,10 @@ class MainActivity : BaseActivity() {
                 adapter.notifyDataSetChanged()
 
             }
+
+            override fun onComplete(call: Call<MutableList<BeerModel>>, response: Response<MutableList<BeerModel>>) {
+                swipeRefreshLayout.isRefreshing = false
+            }
         })
 
     }
@@ -123,6 +128,8 @@ class MainActivity : BaseActivity() {
                 moreData()
             }
         })
+
+        swipeRefreshLayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener { initData() })
 
 
     }
@@ -158,7 +165,7 @@ class MainActivity : BaseActivity() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-            var v: View? = null
+            var v: View?
 
             when (viewType) {
                 VIEW_TYPE_FIRST ->{
@@ -190,6 +197,13 @@ class MainActivity : BaseActivity() {
                 VIEW_TYPE_THIRD -> {
                     bindTextHolder(holder as TextViewHolder, position)
                 }
+            }
+
+            holder.itemView.setOnClickListener{
+                val data = dataList[position]
+                val intent = Intent(this@MainActivity, BeerDetailActivity::class.java)
+                intent.putExtra(Constants.BEER_ID, data.id)
+                startActivity(intent)
             }
 
 
@@ -234,8 +248,7 @@ class MainActivity : BaseActivity() {
 
         override fun getItemViewType(position: Int):Int {
 
-            val data = dataList[position]
-
+            //val data = dataList[position]
             //data 의 구분 값이 명확하면 이곳에서 나누나 주류 분류가 명확하지 않아 viewType 관련 과제는 랜덤으로 처리
 
              when (position % 9) {
