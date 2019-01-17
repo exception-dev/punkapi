@@ -5,6 +5,8 @@
     <string name="app_info">H a n d m a d e B e e r</string>
     <string name="copyright">2019 ⓒ exception inc</string>
 
+    <string name="msg_finish">\'뒤로\' 한번 더 누르시면 종료됩니다.</string>
+
 
     <string name="abv">ABV</string>
     <string name="ibu">IBU</string>

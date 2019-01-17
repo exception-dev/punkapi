@@ -10,9 +10,9 @@
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="2"
+                android:maxLines="1"
                 android:ellipsize="end"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/titleTextColor"
                 android:paddingStart="@dimen/activity_horizontal_margin"
@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:layout_marginTop="4dp"
                 android:textColor="@color/subTextColor"
                 android:paddingStart="@dimen/activity_horizontal_margin"
@@ -42,7 +42,7 @@
                 android:paddingBottom="13dp"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="@color/subTextColor"/>
 
 

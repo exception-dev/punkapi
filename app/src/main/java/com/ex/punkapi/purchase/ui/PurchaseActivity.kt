@@ -106,11 +106,20 @@ class PurchaseActivity : BaseActivity() {
     }
 
     private fun complete(){
+        /**
+         * main 으로 넘어갔을때 이름이 toast로 떠야하는게 어느 구현방법을 보기위함인지 몰라
+         * onNewIntent 와 callback 등록이용 2가지 방식으로 구현
+         * onNewIntent는 toast, callback 이용은 snackbar
+         */
+
+        val name = editTextUser.text.toString()
+
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-
-        intent.putExtra(Constants.Key.USER_NAME, editTextUser.text.toString())
+        intent.putExtra(Constants.Key.USER_NAME, name)
         startActivity(intent)
         finish()
+
+        app.purchaseCompleteManager.purcharseComplete(name)
     }
 }

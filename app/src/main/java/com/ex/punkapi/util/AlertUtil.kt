@@ -4,6 +4,9 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.widget.Toast
+import android.support.design.widget.Snackbar
+import android.view.View
+
 
 object AlertUtils {
 
@@ -31,6 +34,12 @@ object AlertUtils {
 
         toast = Toast.makeText(context, msg, time)
         toast!!.show()
+    }
+
+    fun snackbar(v: View, msg: String){
+        val snackBar = Snackbar.make(v, msg, Snackbar.LENGTH_SHORT)
+        snackBar.setDuration(Snackbar.LENGTH_SHORT)
+        snackBar.show()
     }
 
 

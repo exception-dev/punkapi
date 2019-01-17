@@ -20,6 +20,8 @@ import retrofit2.Response
 import java.util.ArrayList
 import android.text.Spannable
 import android.graphics.Typeface
+import android.os.Handler
+import android.os.Message
 import android.support.v4.content.ContextCompat
 import android.text.style.ForegroundColorSpan
 import android.text.SpannableStringBuilder
@@ -30,10 +32,13 @@ import io.realm.RealmConfiguration
 import kotlinx.android.synthetic.main.activity_main_left_item.view.*
 import kotlinx.android.synthetic.main.activity_main_item.view.*
 import android.support.v4.widget.SwipeRefreshLayout
+import android.widget.ImageView
+import com.ex.punkapi.manager.callback.OnPurchaseCompleteListener
 import com.ex.punkapi.util.AlertUtils
+import kotlinx.android.synthetic.main.activity_main_right_item.view.*
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), OnPurchaseCompleteListener {
 
     private var page = 1
     private var hasData = false
@@ -44,6 +49,23 @@ class MainActivity : BaseActivity() {
 
     private lateinit var realm: Realm
 
+    private val MSG_FINISH = 1
+    private val DELAY:Long = 3000
+
+    private var isFinishFlag = false
+    private val handler = object : Handler() {
+        override fun handleMessage(msg: Message) {
+            when (msg.what) {
+                MSG_FINISH ->
+
+                    isFinishFlag = false
+
+                else -> {
+                }
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
         super.onCreate(savedInstanceState)
@@ -51,6 +73,23 @@ class MainActivity : BaseActivity() {
         init()
         regEvent()
         initData()
+    }
+
+	override fun onBackPressed() {
+
+
+		if (!isFinishFlag) {
+			isFinishFlag = true;
+            AlertUtils.toastShort(this, getString(R.string.msg_finish))
+			handler.sendEmptyMessageDelayed(MSG_FINISH, DELAY);
+			return;
+		}
+		super.onBackPressed();
+	}
+
+    override fun onDestroy() {
+        app.purchaseCompleteManager.removeCallback(this)
+        super.onDestroy()
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -61,7 +100,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun init(){
-
+        app.purchaseCompleteManager.addCallback(this)
         realm = app.getRealm()
 
         layoutManager = LinearLayoutManager(this);
@@ -141,14 +180,22 @@ class MainActivity : BaseActivity() {
         private val VIEW_TYPE_SECOND = 1
         private val VIEW_TYPE_THIRD = 2
 
-        inner class ImageViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+        inner class InfoImageViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
-            val img = v.img
+            val img = v.findViewById<ImageView>(R.id.img)
             val name = v.findViewById<TextView>(R.id.name)
-            val tagline = v.findViewById<TextView>(R.id.tagline)
 
             val info = v.info
             val description = v.findViewById<TextView>(R.id.description)
+
+        }
+
+        inner class TaglineImageViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+
+            val img = v.findViewById<ImageView>(R.id.img)
+            val name = v.findViewById<TextView>(R.id.name)
+
+            val tagline = v.tagline
 
         }
 
@@ -169,11 +216,11 @@ class MainActivity : BaseActivity() {
             when (viewType) {
                 VIEW_TYPE_FIRST ->{
                     v = LayoutInflater.from(parent.context).inflate(R.layout.activity_main_left_item, parent, false)
-                    return ImageViewHolder(v)
+                    return InfoImageViewHolder(v)
                 }
                 VIEW_TYPE_SECOND ->{
                     v = LayoutInflater.from(parent.context).inflate(R.layout.activity_main_right_item, parent, false)
-                    return ImageViewHolder(v)
+                    return TaglineImageViewHolder(v)
                 }
                 else ->{
                     v = LayoutInflater.from(parent.context).inflate(R.layout.activity_main_item, parent, false)
@@ -189,8 +236,12 @@ class MainActivity : BaseActivity() {
 
 
             when (getItemViewType(position)) {
-                VIEW_TYPE_FIRST, VIEW_TYPE_SECOND -> {
-                    bindImageHolder(holder as ImageViewHolder, position)
+                VIEW_TYPE_FIRST -> {
+                    bindInfoImageHolder(holder as InfoImageViewHolder, position)
+                }
+
+                VIEW_TYPE_SECOND -> {
+                    bindTaglineImageHolder(holder as TaglineImageViewHolder, position)
                 }
 
                 VIEW_TYPE_THIRD -> {
@@ -209,16 +260,14 @@ class MainActivity : BaseActivity() {
 
         }
 
-        private fun bindImageHolder(holder: ImageViewHolder, position: Int){
+        private fun bindInfoImageHolder(holder: InfoImageViewHolder, position: Int){
             val data = dataList[position]
 
             GlideApp.with(this@MainActivity)
                 .load(data.imageUrl)
-                .centerCrop()
                 .into(holder.img)
 
             holder.name.text = data.name
-            holder.tagline.text = data.tagline
 
             holder.description.text = data.description
 
@@ -227,10 +276,20 @@ class MainActivity : BaseActivity() {
             makeSpanText(builder, getString(R.string.abv), data.abv)
             makeSpanText(builder, getString(R.string.ibu), data.ibu)
             makeSpanText(builder, getString(R.string.srm), data.srm)
-            makeSpanText(builder, getString(R.string.ebc), data.ebc)
-            makeSpanText(builder, getString(R.string.ph), data.ph)
 
             holder.info.text = builder
+        }
+
+        private fun bindTaglineImageHolder(holder: TaglineImageViewHolder, position: Int){
+            val data = dataList[position]
+
+            GlideApp.with(this@MainActivity)
+                .load(data.imageUrl)
+                .into(holder.img)
+
+            holder.name.text = data.name
+
+            holder.tagline.text = data.tagline
         }
 
         private fun bindTextHolder(holder: TextViewHolder, position: Int){
@@ -263,7 +322,7 @@ class MainActivity : BaseActivity() {
         private fun makeSpanText(builder: SpannableStringBuilder, label: String, value: String?) : SpannableStringBuilder{
             if (value != null){
                 if(builder.isNotEmpty()){
-                    builder.append("\r\n")
+                    builder.append("\n")
                 }
                 val startIndex = builder.length
                 builder.append("$label : $value");
@@ -280,5 +339,9 @@ class MainActivity : BaseActivity() {
         }
     }
 
+
+    override fun onComplete(name: String) {
+        AlertUtils.snackbar(recyclerView, name)
+    }
 
 }
