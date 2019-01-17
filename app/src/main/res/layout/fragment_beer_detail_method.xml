@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+                style="@style/InfoLabelStyle"
+                android:text="@string/mash"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"/>
+
+        <TextView
+                android:id="@+id/txtMash"
+                style="@style/InfoMultiValueStyle"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"/>
+
+        <View
+                style="@style/HorizontalViewStyle"
+                android:layout_marginTop="20dp"/>
+
+        <TextView
+                style="@style/InfoLabelStyle"
+                android:text="@string/fermentation"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"/>
+
+        <TextView
+                android:id="@+id/txtFermentation"
+                style="@style/InfoMultiValueStyle"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"/>
+
+        <View
+                style="@style/HorizontalViewStyle"
+                android:layout_marginTop="20dp"/>
+
+
+        <TextView
+                style="@style/InfoLabelStyle"
+                android:text="@string/twist"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"/>
+
+        <TextView
+                android:id="@+id/txtTwist"
+                style="@style/InfoMultiValueStyle"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

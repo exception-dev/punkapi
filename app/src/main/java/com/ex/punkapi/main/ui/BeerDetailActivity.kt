@@ -45,8 +45,8 @@ class BeerDetailActivity : BaseTabActivity() {
     override fun initTab() {
         super.initTab()
         makeMenuTab(getTabView(getString(R.string.base_info)), BeerDetailBaseInfoFragment::class.java!!, getBundle(), null)
-        makeMenuTab(getTabView(getString(R.string.method)), BeerDetailBaseInfoFragment::class.java!!, getBundle(), null)
-        makeMenuTab(getTabView(getString(R.string.ingredient)), BeerDetailBaseInfoFragment::class.java!!, getBundle(), null)
+        makeMenuTab(getTabView(getString(R.string.method)), BeerDetailMethodFragment::class.java!!, getBundle(), null)
+        makeMenuTab(getTabView(getString(R.string.ingredient)), BeerDetailIngredientFragment::class.java!!, getBundle(), null)
 
     }
 

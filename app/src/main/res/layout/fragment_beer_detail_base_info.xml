@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingStart="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_horizontal_margin">
+    android:paddingEnd="@dimen/activity_horizontal_margin">
 
 
     <LinearLayout
@@ -21,10 +21,7 @@
 
         <TextView
                 android:id="@+id/txtTagline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/subTextColor"/>
+                style="@style/InfoValueStyle"/>
 
         <TextView
                 style="@style/InfoLabelStyle"
@@ -32,10 +29,7 @@
 
         <TextView
                 android:id="@+id/txtBrewed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/subTextColor"/>
+                style="@style/InfoValueStyle"/>
 
         <TextView
                 style="@style/InfoLabelStyle"
@@ -43,10 +37,7 @@
 
         <TextView
                 android:id="@+id/txtDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/subTextColor"/>
+                style="@style/InfoValueStyle"/>
 
         <TextView
                 style="@style/InfoLabelStyle"
@@ -54,10 +45,7 @@
 
         <TextView
                 android:id="@+id/txtFoodPairing"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/subTextColor"/>
+                style="@style/InfoValueStyle"/>
 
         <TextView
                 style="@style/InfoLabelStyle"
@@ -65,10 +53,7 @@
 
         <TextView
                 android:id="@+id/txtBrewersTip"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/subTextColor"/>
+                style="@style/InfoValueStyle"/>
 
         <TextView
                 style="@style/InfoLabelStyle"
@@ -76,10 +61,7 @@
 
         <TextView
                 android:id="@+id/txtContribute"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/subTextColor"/>
+                style="@style/InfoValueStyle"/>
 
     </LinearLayout>
 

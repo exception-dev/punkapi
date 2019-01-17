@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PunkApi</string>
+    <string name="app_name">맥주이야기</string>
 
 
     <string name="app_info">H a n d m a d e B e e r</string>
@@ -24,4 +24,12 @@
     <string name="food_pairing">푸드 페어링</string>
     <string name="brewers_tips">양조 팁</string>
     <string name="contributed_by">기부자</string>
+
+    <string name="mash">당화</string>
+    <string name="fermentation">발효</string>
+    <string name="twist">twist</string>
+
+    <string name="malt">맥아</string>
+    <string name="hops">홉</string>
+    <string name="yeast">누룩</string>
 </resources>
