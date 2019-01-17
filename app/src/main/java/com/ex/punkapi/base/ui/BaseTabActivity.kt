@@ -155,8 +155,6 @@ open class BaseTabActivity : BaseActivity() {
             val key = info.clss.getName() + String.format("%02d", position)
 
 
-            println("key : " + key)
-
             if (fragmentMap.get(key) == null) {
 
                 val m = Fragment.instantiate(activity, info.clss.getName(), info.args) as BaseFragment

@@ -29,6 +29,10 @@
         <activity
                 android:name=".main.ui.BeerDetailActivity"
                 android:screenOrientation="portrait"/>
+        <activity
+                android:name=".purchase.ui.PurchaseActivity"
+                android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

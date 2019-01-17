@@ -1,5 +1,6 @@
 package com.ex.punkapi.main.ui
 
+import android.content.Intent
 import android.os.Bundle
 import com.ex.punkapi.R
 import com.ex.punkapi.base.glide.GlideApp
@@ -7,6 +8,7 @@ import com.ex.punkapi.base.ui.BaseTabActivity
 import com.ex.punkapi.common.Constants
 import com.ex.punkapi.model.BeerModel
 import android.support.design.widget.AppBarLayout
+import com.ex.punkapi.purchase.ui.PurchaseActivity
 import kotlinx.android.synthetic.main.activity_beer_detail.*
 
 
@@ -25,8 +27,7 @@ class BeerDetailActivity : BaseTabActivity() {
     }
 
     private fun getIntentData(){
-        beerId = intent.getLongExtra(Constants.BEER_ID, 0);
-
+        beerId = intent.getLongExtra(Constants.Key.BEER_ID, 0);
 
     }
 
@@ -52,7 +53,7 @@ class BeerDetailActivity : BaseTabActivity() {
 
     private fun getBundle() : Bundle{
         val bundle = Bundle()
-        bundle.putLong(Constants.BEER_ID, beerId)
+        bundle.putLong(Constants.Key.BEER_ID, beerId)
         return bundle
     }
 
@@ -80,6 +81,13 @@ class BeerDetailActivity : BaseTabActivity() {
 
             }
         })
+
+        btnPurchase.setOnClickListener {
+            val intent = Intent(this, PurchaseActivity::class.java)
+            intent.putExtra(Constants.Key.BEER_ID, beerId);
+            startActivity(intent)
+            finish()
+        }
 
     }
 

@@ -32,4 +32,16 @@
     <string name="malt">맥아</string>
     <string name="hops">홉</string>
     <string name="yeast">누룩</string>
+
+
+    <string name="count">수량</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+
+    <string name="purchase_description">※구매는 최대 10개까지 가능합니다</string>
+    <string name="buyer">구매자</string>
+
+    <string name="msg_input_name">구매자 이름을 입력해주세요</string>
+    <string name="quest_purchase">구매 하시겠습니까?</string>
+    <string name="msg_complete_purchase">구매 완료되었습니다</string>
 </resources>

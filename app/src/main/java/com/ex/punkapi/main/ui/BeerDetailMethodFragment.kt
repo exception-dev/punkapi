@@ -24,7 +24,6 @@ class BeerDetailMethodFragment : BeerDetailBaseFragment() {
             var sb = StringBuilder()
 
             for(mash in beerModel?.method?.mashTemp!!){
-                println("sb.isNotEmpty() : ${sb.isNotEmpty()}")
                 if(sb.isNotEmpty()){
                     sb.append("\n")
                 }

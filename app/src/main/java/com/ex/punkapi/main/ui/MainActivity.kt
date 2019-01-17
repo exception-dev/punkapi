@@ -30,9 +30,7 @@ import io.realm.RealmConfiguration
 import kotlinx.android.synthetic.main.activity_main_left_item.view.*
 import kotlinx.android.synthetic.main.activity_main_item.view.*
 import android.support.v4.widget.SwipeRefreshLayout
-
-
-
+import com.ex.punkapi.util.AlertUtils
 
 
 class MainActivity : BaseActivity() {
@@ -55,15 +53,16 @@ class MainActivity : BaseActivity() {
         initData()
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        if(intent?.hasExtra(Constants.Key.USER_NAME)!!){
+            AlertUtils.toastShort(this, intent?.getStringExtra(Constants.Key.USER_NAME)!!)
+        }
+    }
+
     private fun init(){
 
         realm = app.getRealm()
-
-        var list = mutableListOf<BeerModel>()
-        list.addAll(realm.where(BeerModel::class.java).findAll())
-        println("list.size : ${list.size}")
-        println("list : ${list}")
-
 
         layoutManager = LinearLayoutManager(this);
         recyclerView.layoutManager = layoutManager
@@ -202,7 +201,7 @@ class MainActivity : BaseActivity() {
             holder.itemView.setOnClickListener{
                 val data = dataList[position]
                 val intent = Intent(this@MainActivity, BeerDetailActivity::class.java)
-                intent.putExtra(Constants.BEER_ID, data.id)
+                intent.putExtra(Constants.Key.BEER_ID, data.id)
                 startActivity(intent)
             }
 

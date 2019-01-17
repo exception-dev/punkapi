@@ -20,7 +20,7 @@ open class BeerDetailBaseFragment : BaseFragment() {
 
     private fun getArgumentData() {
         if (arguments != null) {
-            beerId = arguments!!.getLong(Constants.BEER_ID)
+            beerId = arguments!!.getLong(Constants.Key.BEER_ID)
 
             val realm = app.getRealm()
             beerModel = realm.where(BeerModel::class.java).equalTo("id", beerId).findFirst()

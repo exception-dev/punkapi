@@ -69,4 +69,12 @@
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
+    <style name="PlusMinusButtonStyle" >
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">#F7F7F7</item>
+        <item name="android:textColor">@color/titleTextColor</item>
+    </style>
+
 </resources>
