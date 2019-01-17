@@ -61,34 +61,41 @@ class BeerDetailActivity : BaseTabActivity() {
             finish()
         }
 
-//        appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
-//            var isShow = true
-//            var scrollRange = -1
-//
-//            override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
-//                if (scrollRange == -1) {
-//                    scrollRange = appBarLayout.totalScrollRange
-//                }
-//                if (scrollRange + verticalOffset == 0) {
-//                    collapsingToolbarLayout.title = beerModel?.name
-//                    isShow = true
-//                } else if (isShow) {
-//                    collapsingToolbarLayout.title = ""
-//                    isShow = false
-//                }
-//
-//            }
-//        })
+        appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
+            var isShow = true
+            var scrollRange = -1
+
+            override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
+
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.totalScrollRange
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbarLayout.title = beerModel?.name
+                    isShow = true
+                } else if (isShow) {
+                    collapsingToolbarLayout.title = ""
+                    isShow = false
+                }
+
+            }
+        })
 
     }
 
     private fun bindData(){
-        title = beerModel?.name
         GlideApp.with(this)
             .load(beerModel?.imageUrl)
             .into(imgBeer)
 
         txtName.text = beerModel?.name
+
+        txtAbv.text = beerModel?.abv
+        txtIbu.text = beerModel?.ibu
+        txtSrm.text = beerModel?.srm
+        txtEbc.text = beerModel?.ebc
+        txtPh.text = beerModel?.ph
+
     }
 
 }
