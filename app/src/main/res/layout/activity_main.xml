@@ -7,21 +7,45 @@
         android:layout_height="match_parent"
         tools:context=".main.ui.MainActivity">
 
-    <TextView
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layoutTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin">
+
+        <TextView
             android:id="@+id/txtTitle"
             style="@style/TitleViewStyle"
+            android:layout_width="0dp"
             android:text="@string/app_info"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageButton
+            android:id="@+id/btnFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_filter_selector"
+            android:background="@null"
             app:layout_constraintTop_toTopOf="parent"
-            android:paddingStart="@dimen/activity_horizontal_margin"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:padding="10dp"/>
+
+    </android.support.constraint.ConstraintLayout>
+
 
     <View
             android:id="@+id/divider"
             style="@style/HorizontalViewStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtTitle"/>
+            app:layout_constraintTop_toBottomOf="@id/layoutTitle"/>
 
     <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"

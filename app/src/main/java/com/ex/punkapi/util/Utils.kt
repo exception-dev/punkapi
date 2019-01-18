@@ -18,6 +18,7 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
+import java.lang.NullPointerException
 import java.text.NumberFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -32,14 +33,16 @@ object Utils {
         return currencyFormat.format(value)
     }
 
-    fun toDateString(dateString: String, fromFormat: String, toFormat: String): String {
+    fun toDateString(dateString: String?, fromFormat: String, toFormat: String): String {
         var result = ""
         val df = SimpleDateFormat(fromFormat, Locale.getDefault())
         val df2 = SimpleDateFormat(toFormat, Locale.getDefault())
         try {
             result = df2.format(df.parse(dateString))
         } catch (e: ParseException) {
-            return dateString
+            return dateString!!
+        } catch (e: NullPointerException){
+            return ""
         }
 
         return result

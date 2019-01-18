@@ -28,13 +28,15 @@ import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
 import android.widget.TextView
 import io.realm.Realm
-import io.realm.RealmConfiguration
 import kotlinx.android.synthetic.main.activity_main_left_item.view.*
 import kotlinx.android.synthetic.main.activity_main_item.view.*
-import android.support.v4.widget.SwipeRefreshLayout
 import android.widget.ImageView
+import com.ex.punkapi.dialog.ui.FilterDialog
+import com.ex.punkapi.main.ui.filter.FilterUtil
 import com.ex.punkapi.manager.callback.OnPurchaseCompleteListener
 import com.ex.punkapi.util.AlertUtils
+import com.ex.punkapi.util.Utils
+import io.realm.Sort
 import kotlinx.android.synthetic.main.activity_main_right_item.view.*
 
 
@@ -46,6 +48,7 @@ class MainActivity : BaseActivity(), OnPurchaseCompleteListener {
     private lateinit var adapter: ListAdapter
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private val dataList = mutableListOf<BeerModel>()
+
 
     private lateinit var realm: Realm
 
@@ -60,11 +63,14 @@ class MainActivity : BaseActivity(), OnPurchaseCompleteListener {
 
                     isFinishFlag = false
 
-                else -> {
-                }
             }
         }
     }
+
+    private var filterDialog: FilterDialog? = null
+    private var abv = FilterUtil.ABV_FILTER.NONE
+    private var ibu = FilterUtil.IBU_FILTER.NONE
+    private var ebc = FilterUtil.EBC_FILTER.NONE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
@@ -107,6 +113,25 @@ class MainActivity : BaseActivity(), OnPurchaseCompleteListener {
         recyclerView.layoutManager = layoutManager
         adapter = ListAdapter()
         recyclerView.adapter = adapter
+
+//        val minAbv:BeerModel = realm.where(BeerModel::class.java).sort("abv", Sort.ASCENDING).findFirst()!!
+//        val maxAbv:BeerModel = realm.where(BeerModel::class.java).sort("abv", Sort.DESCENDING).findFirst()!!
+//
+//        val minibu:BeerModel = realm.where(BeerModel::class.java).isNotNull("ibu").isNotEmpty("ibu").sort("ibu", Sort.ASCENDING).findFirst()!!
+//        val maxibu:BeerModel = realm.where(BeerModel::class.java).sort("ibu", Sort.DESCENDING).findFirst()!!
+//
+//        val minEbc:BeerModel = realm.where(BeerModel::class.java).isNotNull("ebc").isNotEmpty("ebc").sort("ebc", Sort.ASCENDING).findFirst()!!
+//        val maxEbc:BeerModel = realm.where(BeerModel::class.java).sort("ebc", Sort.DESCENDING).findFirst()!!
+//
+//        println("minAbv.abv : ${minAbv.abv}")
+//        println("maxAbv.abv : ${maxAbv.abv}")
+//
+//        println("minibu.ibu : ${minibu.ibu}")
+//        println("maxibu.ibu : ${maxibu.ibu}")
+//
+//        println("minEbc.ebc : ${minEbc.ebc}")
+//        println("maxEbc.ebc : ${maxEbc.ebc}")
+
     }
 
 
@@ -116,20 +141,31 @@ class MainActivity : BaseActivity(), OnPurchaseCompleteListener {
     }
 
     private fun getData() {
+
         val parameter = mutableMapOf<String, Any>()
         parameter.put("page", page)
         parameter.put("per_page", Constants.PER_PAGE)
 
+        if(abv != FilterUtil.ABV_FILTER.NONE){
+            parameter.putAll(FilterUtil.getAbvParam(abv))
+        }
 
+        if(ibu != FilterUtil.IBU_FILTER.NONE){
+            parameter.putAll(FilterUtil.getIbuParam(ibu))
+        }
+
+        if(ebc != FilterUtil.EBC_FILTER.NONE){
+            parameter.putAll(FilterUtil.getEbcParam(ebc))
+        }
 
         requestCall(apiService.beers(parameter),  object : NetWorkCallback<MutableList<BeerModel>>(this)   {
             override fun onSuccess(call: Call<MutableList<BeerModel>>, response: Response<MutableList<BeerModel>>, data: MutableList<BeerModel>) {
-
 
                 realm.beginTransaction()
 
                 realm.insertOrUpdate(data)
                 realm.commitTransaction()
+
 
 
                 if(page == 1){
@@ -138,6 +174,12 @@ class MainActivity : BaseActivity(), OnPurchaseCompleteListener {
                 hasData = data.size >= Constants.PER_PAGE
                 dataList.addAll(data)
                 adapter.notifyDataSetChanged()
+
+                if(page == 1){
+                    layoutManager.scrollToPosition(0)
+                }
+
+
 
             }
 
@@ -167,8 +209,32 @@ class MainActivity : BaseActivity(), OnPurchaseCompleteListener {
             }
         })
 
-        swipeRefreshLayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener { initData() })
+        swipeRefreshLayout.setOnRefreshListener { initData() }
 
+        btnFilter.setOnClickListener{
+            showFilter()
+        }
+    }
+
+    private fun showFilter(){
+
+        if(filterDialog == null){
+            filterDialog = FilterDialog(this, btnFilter)
+            filterDialog!!.setOnFilterApplyListener(object : FilterDialog.OnFilterApplyListener {
+                override fun onApply(abv: FilterUtil.ABV_FILTER, ibu: FilterUtil.IBU_FILTER, ebc: FilterUtil.EBC_FILTER) {
+                    this@MainActivity.abv = abv
+                    this@MainActivity.ibu = ibu
+                    this@MainActivity.ebc = ebc
+
+                    initData()
+                }
+            })
+        }
+
+
+        if(!filterDialog!!.isShowing){
+            filterDialog!!.show()
+        }
 
     }
 
@@ -298,7 +364,7 @@ class MainActivity : BaseActivity(), OnPurchaseCompleteListener {
 
 
             holder.name.text = data.name
-            holder.firstBrewed.text = data.firstBrewed
+            holder.firstBrewed.text = Utils.toDateString(data?.firstBrewed, "mm-yyyyy", "yyyy-mm")
             holder.description.text = data.description
 
         }

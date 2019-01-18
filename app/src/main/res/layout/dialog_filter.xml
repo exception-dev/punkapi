@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/filter_dialog_width"
+    android:layout_height="wrap_content"
+    android:background="#efefef">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layoutTitle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/filter"
+            android:textSize="14sp"
+            android:textColor="@color/titleTextColor"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+            android:id="@+id/btnClose"
+            style="@style/TextButtonStyle"
+            android:text="@string/close_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginEnd="10dp"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/divider"
+        style="@style/HorizontalViewStyle"
+        app:layout_constraintTop_toBottomOf="@id/layoutTitle"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layoutContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        android:paddingStart="@dimen/dialog_horizontal_margin"
+        android:paddingEnd="@dimen/dialog_horizontal_margin">
+
+        <TextView
+            android:id="@+id/labelAbv"
+            style="@style/InfoLabelStyle"
+            android:text="@string/filter_abv"
+            android:layout_marginTop="@dimen/dialog_vertical_margin"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RadioGroup
+            android:id="@+id/rgAbv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dialog_vertical_margin"
+            app:layout_constraintTop_toBottomOf="@id/labelAbv"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbAbvNone"
+                style="@style/FilterRadioButtonStyle"
+                android:text="@string/filter_none"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/rbAbvWeakly"
+                style="@style/FilterRadioButtonStyle"
+                android:text="@string/weakly"
+                android:layout_marginStart="6dp"/>
+
+            <RadioButton
+                android:id="@+id/rbAbvNomal"
+                style="@style/FilterRadioButtonStyle"
+                android:text="@string/normal"
+                android:layout_marginStart="6dp"/>
+
+            <RadioButton
+                android:id="@+id/rbAbvStrong"
+                style="@style/FilterRadioButtonStyle"
+                android:text="@string/strongly"
+                android:layout_marginStart="6dp"/>
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/labelIbu"
+            style="@style/InfoLabelStyle"
+            android:text="@string/filter_ibu"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@id/rgAbv"/>
+
+        <RadioGroup
+            android:id="@+id/rgIbu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dialog_vertical_margin"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/labelIbu">
+
+            <RadioButton
+                android:id="@+id/rbIbuNone"
+                style="@style/FilterRadioButtonStyle"
+                android:text="@string/filter_none"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/rbIbuWeakly"
+                style="@style/FilterRadioButtonStyle"
+                android:text="@string/weakly"
+                android:layout_marginStart="6dp"/>
+
+            <RadioButton
+                android:id="@+id/rbIbuNomal"
+                style="@style/FilterRadioButtonStyle"
+                android:text="@string/normal"
+                android:layout_marginStart="6dp"/>
+
+            <RadioButton
+                android:id="@+id/rbIbuStrong"
+                style="@style/FilterRadioButtonStyle"
+                android:text="@string/strongly"
+                android:layout_marginStart="6dp"/>
+
+
+        </RadioGroup>
+        <TextView
+            android:id="@+id/labelEbc"
+            style="@style/InfoLabelStyle"
+            android:text="@string/filter_ebc"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@id/rgIbu"/>
+
+        <RadioGroup
+            android:id="@+id/rgEbc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dialog_vertical_margin"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/labelEbc">
+
+
+            <RadioButton
+                android:id="@+id/rbEbcNone"
+                style="@style/FilterRadioButtonStyle"
+                android:text="@string/filter_none"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/rbEbcLight"
+                style="@style/FilterRadioButtonStyle"
+                android:text="@string/lighty"
+                android:layout_marginStart="6dp"/>
+
+            <RadioButton
+                android:id="@+id/rbEbcNomal"
+                style="@style/FilterRadioButtonStyle"
+                android:text="@string/normal"
+                android:layout_marginStart="6dp"/>
+
+            <RadioButton
+                android:id="@+id/rbEbcThick"
+                style="@style/FilterRadioButtonStyle"
+                android:text="@string/thick"
+                android:layout_marginStart="6dp"/>
+
+
+        </RadioGroup>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/dividerButton"
+        style="@style/HorizontalViewStyle"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutContent"/>
+
+    <LinearLayout
+        android:id="@+id/layoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/dividerButton"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btnApply"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/apply"
+            android:textColor="#ffffff"
+            android:background="@color/pointLightColor"/>
+
+    </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

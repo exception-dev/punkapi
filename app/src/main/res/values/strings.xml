@@ -43,7 +43,27 @@
     <string name="purchase_description">※구매는 최대 10개까지 가능합니다</string>
     <string name="buyer">구매자</string>
 
+    <string name="filter">필터</string>
+    <string name="close_button">X</string>
+
+    <string name="filter_abv">알콜 도수</string>
+    <string name="filter_ibu">쓴맛</string>
+    <string name="filter_ebc">색상</string>
+
+    <string name="filter_none">적용안함</string>
+    <string name="lighty">연하게</string>
+    <string name="normal">보통</string>
+    <string name="thick">진하게</string>
+    <string name="strongly">강하게</string>
+    <string name="weakly">약하게</string>
+
+
+    <string name="apply">적용</string>
+
     <string name="msg_input_name">구매자 이름을 입력해주세요</string>
     <string name="quest_purchase">구매 하시겠습니까?</string>
     <string name="msg_complete_purchase">구매 완료되었습니다</string>
+
+
+
 </resources>
