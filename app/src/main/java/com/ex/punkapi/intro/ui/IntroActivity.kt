@@ -8,7 +8,7 @@ import com.ex.punkapi.R
 import com.ex.punkapi.base.ui.BaseActivity
 import com.ex.punkapi.main.ui.MainActivity
 
-private const val TIMER:Long = 1000
+private const val TIMER:Long = 3000
 private const val MSG_CHECK:Int = 1;
 
 

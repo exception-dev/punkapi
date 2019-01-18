@@ -63,6 +63,7 @@
     <string name="msg_input_name">구매자 이름을 입력해주세요</string>
     <string name="quest_purchase">구매 하시겠습니까?</string>
     <string name="msg_complete_purchase">구매 완료되었습니다</string>
+    <string name="msg_no_data">조회된 목록이 없습니다.</string>
 
 
 

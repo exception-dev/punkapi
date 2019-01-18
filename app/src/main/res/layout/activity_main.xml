@@ -47,15 +47,39 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layoutTitle"/>
 
+
+
     <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshLayout"
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/divider"
-            app:layout_constraintBottom_toBottomOf="parent">
-        <com.ex.punkapi.widget.RefreshRecyclerView
+            android:layout_height="match_parent">
+            <com.ex.punkapi.widget.RefreshRecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/txtNoData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_no_data"
+                android:drawablePadding="20dp"
+                android:text="@string/msg_no_data"
+                android:layout_centerInParent="true"
+                android:textColor="#dddddd"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:visibility="gone"
+            />
+
+        </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
+
+
 </android.support.constraint.ConstraintLayout>

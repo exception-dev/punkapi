@@ -166,14 +166,20 @@ class MainActivity : BaseActivity(), OnPurchaseCompleteListener {
                 realm.insertOrUpdate(data)
                 realm.commitTransaction()
 
-
-
                 if(page == 1){
                     dataList.clear();
                 }
                 hasData = data.size >= Constants.PER_PAGE
                 dataList.addAll(data)
                 adapter.notifyDataSetChanged()
+
+                if(dataList.size == 0){
+                    recyclerView.visibility = View.GONE
+                    txtNoData.visibility = View.VISIBLE
+                }else{
+                    recyclerView.visibility = View.VISIBLE
+                    txtNoData.visibility = View.GONE
+                }
 
                 if(page == 1){
                     layoutManager.scrollToPosition(0)
@@ -191,8 +197,6 @@ class MainActivity : BaseActivity(), OnPurchaseCompleteListener {
     }
 
     private fun moreData() {
-
-
         page++
         if (!hasData) {
             return
