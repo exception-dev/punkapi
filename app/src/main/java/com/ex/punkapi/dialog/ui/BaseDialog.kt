@@ -11,8 +11,6 @@ import com.ex.punkapi.R
 import com.ex.punkapi.base.BaseApplication
 
 
-
-
 open class BaseDialog(context: Context) : Dialog(context, R.style.AppThemeDialog) {
 
 

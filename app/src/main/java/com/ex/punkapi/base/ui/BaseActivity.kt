@@ -11,7 +11,6 @@ import retrofit2.Call
 
 open class BaseActivity : AppCompatActivity() {
 
-
     private lateinit var callQueue: CallQueue
     protected lateinit var apiService: ApiService
     protected lateinit var app: BaseApplication

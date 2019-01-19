@@ -18,13 +18,10 @@ open class BaseFragment : Fragment() {
 
     protected var backStackEntryCount = 0
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         backStackEntryCount = fragmentManager!!.backStackEntryCount
     }
-
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -32,10 +29,6 @@ open class BaseFragment : Fragment() {
 
         app = context!!.applicationContext as BaseApplication
     }
-
-
-
-
 
     override fun onDestroyView() {
         if (rootView != null && rootView!!.getParent() != null) {

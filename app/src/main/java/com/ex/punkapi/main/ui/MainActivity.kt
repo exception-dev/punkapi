@@ -31,6 +31,7 @@ import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main_left_item.view.*
 import kotlinx.android.synthetic.main.activity_main_item.view.*
 import android.widget.ImageView
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ex.punkapi.dialog.ui.FilterDialog
 import com.ex.punkapi.main.ui.filter.FilterUtil
 import com.ex.punkapi.manager.callback.OnPurchaseCompleteListener
@@ -335,6 +336,7 @@ class MainActivity : BaseActivity(), OnPurchaseCompleteListener {
 
             GlideApp.with(this@MainActivity)
                 .load(data.imageUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.img)
 
             holder.name.text = data.name

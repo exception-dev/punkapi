@@ -9,8 +9,6 @@ object Constants {
         const val USER_NAME = "user_name"
     }
 
-
-
     const val MIN_COUNT = 1
     const val MAX_COUNT = 10
 

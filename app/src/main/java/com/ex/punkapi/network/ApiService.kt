@@ -13,6 +13,6 @@ interface ApiService {
     fun beers(@QueryMap params: MutableMap<String, Any>): Call<MutableList<BeerModel>>
 
     @GET("beers/{id}")
-    fun playerInfo(@Path("id") playerId: String): Call<*>
+    fun beerInfo(@Path("id") beerId: Long): Call<*>
 
 }
